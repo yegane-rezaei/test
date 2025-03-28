@@ -29,7 +29,6 @@ function loginPost(Request $request){
         // Authentication successful, retrieve the user
         $user = Auth::user(); // Get the authenticated user object
         if ($user) {
-            // Auth::login($user);  <-- REMOVE THIS LINE
 
             return redirect()->intended(route('home'));
         } else {
@@ -61,7 +60,7 @@ function loginPost(Request $request){
     }
 
     function logout(){
-        Session::flush(); // Use the Session facade
+        Session::flush();
         Auth::logout();
         return redirect(route('login'));
     }
