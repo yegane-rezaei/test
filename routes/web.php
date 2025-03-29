@@ -3,9 +3,9 @@
 use App\Http\Controllers\AuthManager;
 use Illuminate\Support\Facades\Route;
 
-// Route::get('/', function () {
-//     return view('welcome');
-// })->name('home');
+Route::get('/', function () {
+    return view('welcome');
+})->name('home');
 
 Route::get('/login', [AuthManager::class, 'login'])->name('login');
 Route::post('/login', [AuthManager::class, 'loginPost'])->name('login.post');
@@ -15,3 +15,9 @@ Route::post('/registration', [AuthManager::class, 'registrationPost'])->name('re
 
 
 Route::get('/logout', [AuthManager::class, 'logout'])->name('logout');
+
+Route::group(["middleware" =>'auth'],function(){
+    Route::get('/profile', function(){
+        return "Hi";
+    });
+});

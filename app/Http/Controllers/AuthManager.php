@@ -6,7 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Session; 
+use Illuminate\Support\Facades\Session;
 
 class AuthManager extends Controller
 {
@@ -26,15 +26,8 @@ function loginPost(Request $request){
 
     $credentials = $request ->only('email','password');
     if(Auth::attempt($credentials)){
-        // Authentication successful, retrieve the user
-        $user = Auth::user(); // Get the authenticated user object
-        if ($user) {
 
-            return redirect()->intended(route('home'));
-        } else {
-            //Shouldn't happen, but handle the case where Auth::user() is null
-            return redirect(route('login'))->with('error', 'Authentication successful, but user retrieval failed.');
-        }
+        return redirect()->intended(route('home'));
 
     }
     return redirect(route('login'))->with('error', 'login details are not valid');
